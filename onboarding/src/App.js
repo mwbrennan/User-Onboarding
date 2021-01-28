@@ -3,6 +3,9 @@ import UserForm from './UserForm';
 import * as yup from 'yup';
 import axios from 'axios';
 import schema from './formSchema';
+import User from './User'
+
+
 const initialValues = {
     name: '',
     email: '',
@@ -31,7 +34,7 @@ export default function App() {
       axios
         .get("https://reqres.in/api/users")
         .then((res) => {
-          setUsers(res.data);
+          setUsers(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -60,13 +63,13 @@ export default function App() {
                 setFormErrors({
                     ...formErrors,
                     [name]: '',
-                }).catch((err) => {
-                    setFormErrors({
-                        ...formErrors,
-                        [name]: err.errors[0],
-                    })
                 })
-            })
+            }).catch((err) => {
+              setFormErrors({
+                  ...formErrors,
+                  [name]: err.errors[0],
+              })
+          })
         setFormValues({
             ...formValues,
             [name]: value,
@@ -92,6 +95,8 @@ export default function App() {
           setDisabled(!valid)
         });
     }, [formValues]);
+
+    console.log(users)
 
     return (
         <div className='container'>
