@@ -20,7 +20,7 @@ export default function UserForm(props) {
         <form onSubmit={onSubmit}>
             <div>
                 <h2>Enter your info</h2>
-                <button disabled={disabled} >Submit</button>
+                <button id='subBtn' disabled={disabled} >Submit</button>
 
                 <div className='errors'>
                     <div>{errors.name}</div>
